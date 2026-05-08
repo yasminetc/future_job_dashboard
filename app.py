@@ -265,36 +265,25 @@ with col_l:
 
 st.markdown("---")
 
-# ── Section 7: Salary Density (Plotly ff) ───────────────────────────────────
 st.subheader("📈 Section 7 — Salary Density by Industry")
 
 if st.checkbox("Show Salary Density Distribution"):
-    industries_avail = sorted(filtered_df["industry"].unique())
-    hist_data = [
-        filtered_df[filtered_df["industry"] == ind]["salary_usd"].dropna().tolist()
-        for ind in industries_avail
-    ]
-    # Filter out empty lists
-    valid = [(h, l) for h, l in zip(hist_data, industries_avail) if len(h) > 1]
-    if valid:
-        hist_data_clean, labels_clean = zip(*valid)
-        fig_ff = ff.create_distplot(
-            list(hist_data_clean),
-            list(labels_clean),
-            bin_size=5000,
-            show_rug=False
-        )
-        fig_ff.update_layout(
-            title="Salary Density per Industry",
-            xaxis_title="Salary (USD)",
-            height=420
-        )
-        st.plotly_chart(fig_ff, use_container_width=True)
-    else:
-        st.info("Not enough data for density plot with current filters.")
+    fig_ff = px.histogram(
+        filtered_df,
+        x="salary_usd",
+        color="industry",
+        nbins=40,
+        opacity=0.6,
+        marginal="box"
+    )
 
-st.markdown("---")
+    fig_ff.update_layout(
+        title="Salary Distribution per Industry",
+        xaxis_title="Salary (USD)",
+        height=420
+    )
 
+    st.plotly_chart(fig_ff, use_container_width=True)
 # ── Section 8: Raw Data Explorer ────────────────────────────────────────────
 st.subheader("🗂️ Section 8 — Raw Data Explorer")
 
