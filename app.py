@@ -265,26 +265,7 @@ with col_l:
 
 st.markdown("---")
 
-st.subheader("📈 Section 7 — Salary Density by Industry")
-
-if st.checkbox("Show Salary Density Distribution"):
-    fig_ff = px.histogram(
-        filtered_df,
-        x="salary_usd",
-        color="industry",
-        nbins=40,
-        opacity=0.6,
-        marginal="box"
-    )
-
-    fig_ff.update_layout(
-        title="Salary Distribution per Industry",
-        xaxis_title="Salary (USD)",
-        height=420
-    )
-
-    st.plotly_chart(fig_ff, use_container_width=True)
-# ── Section 8: Raw Data Explorer ────────────────────────────────────────────
+# ── Section 7: Raw Data Explorer ────────────────────────────────────────────
 st.subheader("🗂️ Section 8 — Raw Data Explorer")
 
 if st.checkbox("Show Raw Data Table"):
@@ -299,7 +280,7 @@ if st.checkbox("Show Raw Data Table"):
 
 st.markdown("---")
 
-# ── Section 9: Salary Predictor ─────────────────────────────────────────────
+# ── Section 8: Salary Predictor ─────────────────────────────────────────────
 st.subheader("🔮 Section 9 — Quick Salary Lookup")
 st.markdown("Select job attributes to see the **average salary** for that profile in the dataset.")
 
